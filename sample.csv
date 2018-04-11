@@ -1,0 +1,4 @@
+shell_depth,ceiling_height,building_xlen,building_ratio,wwr,boundaries,shading,hpav,azimuth,@@floor@@,@@roof@@,@@paredeexterna@@,@@vidro@@
+4,2,12,0.8,0.8,top,0,0,0,PisoCeramica,Cobertura31,Parede23,Vid1
+5,3,15,1,0.5,pex,2,56,90,PisoMadeira,Cobertura32,Parede12,Vid2
+6,5,52,1.5,0.2,bot,4,12,180,PisoMadeira,Cobertura31,Parede21,Vid3
