@@ -90,12 +90,6 @@ def mapValues(lhd, possibleValues, headerCsv, sampleSize):
 		for j in range(0, len(possibleValues)):
 			if headerCsv[j][:2] == '@#':
 				value = float(min(possibleValues[j]))+(float(max(possibleValues[j]))-float(min(possibleValues[j])))*lhd[i][j]
-				# print(headerCsv[j])
-				# print('max',float(max(possibleValues[j])))
-				# print('min',float(min(possibleValues[j])))
-				# print('dif',float(max(possibleValues))-float(min(possibleValues)))
-				#print(lhd[i][j])
-				#print(value)
 			else:
 				value_position = int(discrete(lhd[i][j],len(possibleValues[j])))-1
 				value = str(possibleValues[j][value_position])
