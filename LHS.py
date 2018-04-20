@@ -129,19 +129,19 @@ parser.add_argument('-o',
 
 args = parser.parse_args()
 
-if args.s:
+if args.samplesize:
     sampleSize = args.s
 else:
     sampleSize = 1000
     print('No sample size was specified! Let\'s create',sampleSize,'cases...') 
     
-if args.i:
+if args.input:
     vectors = args.i
 else:
     vectors = 'vectors.csv'
     print('No input file name was specified! Assuming it\'s called',vectors,'...') 
     
-if args.o:
+if args.output:
     sample_file = args.o
 else:
     sample_file = 'sample.csv'
