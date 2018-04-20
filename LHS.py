@@ -1,10 +1,8 @@
 # Para utilizar, crie um arquivo na mesma pasta chamado 'vectors.csv', e defina o tamanho da amostra pelo sampleSize
 
+import argparse
 import csv
 from pyDOE import lhs
-
-sampleSize = 10
-vectors = 'vectors.csv'
 
 def csvToHash(vectors):
 	# Reads the vectors file, and returns a dictionary with the values
@@ -98,14 +96,56 @@ def mapValues(lhd, possibleValues, headerCsv, sampleSize):
 
 	return mappedValues
 
-def writeMappedValues(mappedValues):
-	newFile = open("sample.csv", 'w', newline="")
+def writeMappedValues(mappedValues, sample_file):
+	newFile = open(sample_file, 'w', newline="")
 	csvWriter = csv.writer(newFile, delimiter=',', quotechar='|')
 
 	csvWriter.writerow(headerCsv)
 
 	for values in mappedValues:
 		csvWriter.writerow(values)
+
+parser = argparse.ArgumentParser(description='Creates samples using Lantin Hypercurbe method.')
+parser.add_argument('-s',
+                    '--samplesize',
+                    metavar = '',
+                    action='store',
+                    type=int,
+                    help='sample size')
+                    
+parser.add_argument('-i',
+                    '--input',
+                    metavar = '',
+                    action='store',
+                    type=str,
+                    help='input file name')
+                    
+parser.add_argument('-o',
+                    '--output',
+                    metavar = '',
+                    action='store',
+                    type=str,
+                    help='output file name')
+
+args = parser.parse_args()
+
+if args.s:
+    sampleSize = args.s
+else:
+    sampleSize = 1000
+    print('No sample size was specified! Let\'s create',sampleSize,'cases...') 
+    
+if args.i:
+    vectors = args.i
+else:
+    vectors = 'vectors.csv'
+    print('No input file name was specified! Assuming it\'s called',vectors,'...') 
+    
+if args.o:
+    sample_file = args.o
+else:
+    sample_file = 'sample.csv'
+    print('No output file name was specified! Assuming it\'s called',sample_file,'...') 
 
 ReadCSV = csvToHash(vectors)
 
@@ -116,4 +156,4 @@ lhd = lhsValues(possibleValues, sampleSize)
 
 mappedValues = mapValues(lhd, possibleValues, headerCsv, sampleSize)
 
-writeMappedValues(mappedValues)
+writeMappedValues(mappedValues, sample_file)
